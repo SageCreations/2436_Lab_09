@@ -28,8 +28,8 @@ int main()
 
     ifstream infile;
 
-    // infile.open("dvdDat.txt");
-    infile.open("C:\\Users\\Mike\\Documents\\Blinn\\fall2020\\cosc2436\\examples\\ch19\\dvdDat.txt");
+    infile.open("dvdDat.txt");
+    //infile.open("C:\\Users\\Mike\\Documents\\Blinn\\fall2020\\cosc2436\\examples\\ch19\\dvdDat.txt");
 
     if (!infile) {
         cout << "The input file does not exist. " 
