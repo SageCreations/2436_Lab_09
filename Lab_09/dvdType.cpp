@@ -1,24 +1,19 @@
 #include <iostream>
 #include <string>
-#include "dvdType.h"
+#include "voteCountType.h"
 
 using namespace std;
 
-void dvdType::setDVDInfo(string title, string star1,
-                         string star2, string producer,  
-                         string director,
-                         string productionCo,
-                         int setInStock)
+void voteCountType::setVoterInfo(string ID, string sN, int eVoteAvailable,
+                        int voteCountRpublican, int voteCountDemocrat)
 {
-    dvdTitle = title;
-    movieStar1 = star1;
-    movieStar2 = star2;
-    movieProducer = producer;
-    movieDirector = director;
-    movieProductionCo = productionCo; 
-    copiesInStock = setInStock;
+    stateID = ID;
+    stateName = sN;
+    eVotes = eVoteAvailable;
+    popVR = voteCountRpublican;
+    popVD = voteCountDemocrat;
 }
-
+// TODO: this is where i left off.
 void dvdType::checkOut()
 {
     if (getNoOfCopiesInStock() > 0)
