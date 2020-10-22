@@ -75,6 +75,11 @@ string dvdType::getTitle() const
     return dvdTitle;
 }
 
+dvdType::dvdType()
+{
+    setDVDInfo("", "", "", "", "", "", 0);
+}
+
 dvdType::dvdType(string title, string star1, 
                      string star2, string producer, 
                      string director,
