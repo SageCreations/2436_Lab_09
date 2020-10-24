@@ -15,20 +15,17 @@ class voteCountType {
     int getPopularVoteDemocrat() const;
 
     // all the functions from the dvd store database
-    /*void checkOut();
+    void checkOut();
     void checkIn();
     int getNoOfCopiesInStock() const;
-    void printTitle() const;
+    void printID() const;
     void printInfo() const;
-    bool checkTitle(string title);
-    void updateInStock(int num);
-    void setCopiesInStock(int num);
-    string getTitle() const;
-    dvdType();
-    dvdType(string title, string star1, 
-                      string star2, string producer, 
-                      string director,
-                      string productionCo, int setInStock);*/
+    bool checkID(string sID);
+    void setElectoralVotesAvailable(int num);
+    string getStateID() const;
+    voteCountType();
+    voteCountType(string stateID, string stateName, int eVoteAvailable,
+                        int voteCountRpublican, int voteCountDemocrat);
 
         //Overload the relational operators
     bool operator==(const voteCountType& right) const;
