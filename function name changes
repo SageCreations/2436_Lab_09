@@ -1,0 +1,5 @@
+setCopiesInStock() ---> setElectoralVotesAvailable()
+printTitle() ---> printID()
+checkTitle() ---> checkID()
+getTitle()  ---> getStateID()
+setDVDInfo() ---> setVoterInfo()

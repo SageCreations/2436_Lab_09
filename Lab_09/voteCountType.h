@@ -21,6 +21,8 @@ class voteCountType {
     void printID() const;
     void printInfo() const;
     bool checkID(string sID);
+    void updateRepVoteCount(int num);
+    void updateDemVoteCount(int num);
     void setElectoralVotesAvailable(int num);
     string getStateID() const;
     voteCountType();
@@ -34,7 +36,7 @@ class voteCountType {
     bool operator<=(const voteCountType& right) const;
     bool operator>(const voteCountType& right) const;
     bool operator>=(const voteCountType& right) const;
-    friend ostream& operator<<(ostream& osObject, const voteCountType& dvd);
+    friend ostream& operator<<(ostream& osObject, const voteCountType& vote);
   
   private:
     string stateID;

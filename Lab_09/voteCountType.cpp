@@ -64,6 +64,16 @@ int voteCountType::getPopularVoteRepublican() const
     return this->popVR;
 }
 
+void voteCountType::updateRepVoteCount(int num)
+{
+    popVR += num;
+}
+   
+void voteCountType::updateDemVoteCount(int num)
+{
+    popVD += num;
+}
+
 void voteCountType::setElectoralVotesAvailable(int num)
 {
     eVotes = num;
@@ -117,17 +127,17 @@ bool voteCountType::operator>=(const voteCountType& right) const
     return (this->stateID >= right.stateID);
 }
 
-ostream& operator<< (ostream& osObject, const voteCountType& dvd)
+ostream& operator<< (ostream& osObject, const voteCountType& vote)
 {
     osObject << endl;
-    osObject << "  State ID: " << dvd.stateID << endl;
-    osObject << "State Name: " << dvd.stateName << endl;
-    osObject << "Electorial Votes Available: " << dvd.eVotes << endl;
-    osObject << "Popular vote count (Republican): " << dvd.popVR << endl;
-    osObject << "Popular vote count (Democrat): " << dvd.popVD << endl;
+    osObject << "  State ID: " << vote.stateID << endl;
+    osObject << "State Name: " << vote.stateName << endl;
+    osObject << "Electorial Votes Available: " << vote.eVotes << endl;
+    osObject << "Popular vote count (Republican): " << vote.popVR << endl;
+    osObject << "Popular vote count (Democrat): " << vote.popVD << endl;
     osObject << "_____________________________________" << endl;
 
-    return osObject;
+    return osObject; 
 }
 
 // finished backend info----- move on to the next lvl up

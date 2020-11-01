@@ -11,24 +11,24 @@
 #include <fstream>
 #include <string>
 #include "binarySearchTree.h"
-#include "dvdType.h"
-#include "dvdBinaryTree.h" 
+#include "voteCountType.h"
+#include "VoteBinaryTree.h" 
 
 using namespace std; 
 
 void createDVDList(ifstream& infile, 
-                   dvdBinaryTree& dvdList);
+                   VoteBinaryTree& voteList);
 void displayMenu();
  
 int main()
 {
-    dvdBinaryTree  dvdList;
+    VoteBinaryTree  voteList;
     int choice;
-    string title;
+    string id;
 
     ifstream infile;
 
-    infile.open("dvdDat.txt");
+    infile.open("states.txt");
     //infile.open("C:\\Users\\Mike\\Documents\\Blinn\\fall2020\\cosc2436\\examples\\ch19\\dvdDat.txt");
 
     if (!infile) {
@@ -37,7 +37,7 @@ int main()
         return 1;
     }
 
-    createDVDList(infile, dvdList);
+    createDVDList(infile, voteList);
     infile.close();
 
     displayMenu();              //show the menu
@@ -53,79 +53,79 @@ int main()
         {
         case 1: 
             cout << "Enter the title: ";
-            getline(cin, title);
+            getline(cin, id);
             cout << endl;
 
-            if (dvdList.dvdSearch(title))
-                cout << "The store carries " << title << endl;
+            if (voteList.voteSearch(id))
+                cout << "The store carries " << id << endl;
             else
-                cout << "The store does not carry " << title
+                cout << "The store does not carry " << id
                      << endl;
             break;
 
         case 2: 
             cout << "Enter the title: ";
-            getline(cin, title);
+            getline(cin, id);
             cout << endl;
 
-            if (dvdList.dvdSearch(title))
+            if (voteList.voteSearch(id))
             {
-                if (dvdList.isDVDAvailable(title))
+                if (voteList.isVoteAvailable(id))
                 {
-                    dvdList.dvdCheckOut(title);
-                    cout << "Enjoy your movie: " << title
+                    voteList.voteCheckOut(id);
+                    cout << "Enjoy your movie: " << id
                          << endl;
                 }
                 else
-                    cout << "Currently " << title
+                    cout << "Currently " << id
                          << " is out of stock." << endl;
             }
             else
-                cout << "The store does not carry " << title
+                cout << "The store does not carry " << id
                      << endl;
             break;
 
         case 3: 
             cout << "Enter the title: ";
-            getline(cin, title);
+            getline(cin, id);
             cout << endl;
 
-            if (dvdList.dvdSearch(title))
+            if (voteList.voteSearch(id))
             {
-                dvdList.dvdCheckIn(title);
-                cout << "Thanks for returning " << title
+                voteList.voteCheckIn(id);
+                cout << "Thanks for returning " << id
                      << endl;
             }
             else
-                cout << "The store does not carry " << title
+                cout << "The store does not carry " << id
                      << endl;
             break;
 
         case 4: 
             cout << "Enter the title: ";
-            getline(cin, title);
+            getline(cin, id);
             cout << endl;
 
-            if (dvdList.dvdSearch(title))
+            if (voteList.voteSearch(id))
             {
-                if (dvdList.isDVDAvailable(title))
-                    cout << title << " is currently in "
+                if (voteList.isVoteAvailable(id))
+                    cout << id << " is currently in "
                          << "stock." << endl;
                 else
-                    cout << title << " is currently out "
+                    cout << id << " is currently out "
                          << "of stock." << endl;
             }
             else
-                cout << "The store does not carry " << title
+                cout << "The store does not carry " << id
                      << endl;
             break;
 
         case 5: 
-            dvdList.dvdPrintTitle();
+            voteList.votePrintTitle();
             break;
 
         case 6: 
-            dvdList.inorderTraversal();
+            voteList.inorderTraversal();
             break;
 
         default: cout << "Invalid selection." << endl;
@@ -142,33 +142,27 @@ int main()
     return 0;
 }
 
-void createDVDList(ifstream& infile, dvdBinaryTree& dvdList)
+void createDVDList(ifstream& infile, VoteBinaryTree& voteList)
 {
-    string title;
-    string star1;
-    string star2;
-    string producer;
-    string director;
-    string productionCo;
-    int inStock; 
+    string id;
+    string state;
+    int repVote;
+    int demVote;
+    int electoralVote; 
 
-    dvdType newDVD;
+    voteCountType newVote;
 
-    getline(infile, title);
+    //getline(infile, id);
 
     while (infile) {
-        getline(infile, star1);
-        getline(infile, star2);
-        getline(infile, producer);
-        getline(infile, director);
-        getline(infile, productionCo);
-        infile >> inStock;
+        getline(infile, id);
+        getline(infile, state);
+        infile >> electoralVote;
         infile.ignore(100, '\n');
-        newDVD.setDVDInfo(title, star1, star2, producer,
-                              director, productionCo, inStock);
-        dvdList.insert(newDVD);
+        newVote.setVoterInfo(id, state, electoralVote, repVote, demVote);
+        voteList.insert(newVote);
 
-        getline(infile, title);
+        //getline(infile, id);
     }
 }
 

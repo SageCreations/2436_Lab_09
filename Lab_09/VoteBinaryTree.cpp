@@ -1,15 +1,15 @@
 #include <iostream>
 #include <string>
-#include "dvdBinaryTree.h"
+#include "VoteBinaryTree.h"
 
 using namespace std;
 
-bool dvdBinaryTree::isDVDAvailable(string title)
+bool VoteBinaryTree::isVoteAvailable(string title)
 {
     bool found;
-    nodeType<dvdType> *location;
+    nodeType<voteCountType> *location;
 
-    searchDVDList(title, found, location);
+    searchVoteList(title, found, location);
 
     if (found)
         found = (location->info.getNoOfCopiesInStock() > 0);
@@ -19,12 +19,12 @@ bool dvdBinaryTree::isDVDAvailable(string title)
     return found;
 }
 
-void dvdBinaryTree::dvdCheckIn(string title)
+void VoteBinaryTree::voteCheckIn(string title)
 {
     bool found = false;
-    nodeType<dvdType> *location;
+    nodeType<voteCountType> *location;
 
-    searchDVDList(title, found, location);
+    searchVoteList(title, found, location);
 
     if (found)
         location->info.checkIn();
@@ -33,12 +33,12 @@ void dvdBinaryTree::dvdCheckIn(string title)
              << endl;
 }
 
-void dvdBinaryTree::dvdCheckOut(string title)
+void VoteBinaryTree::voteCheckOut(string title)
 {
     bool found = false;
-    nodeType<dvdType> *location;
+    nodeType<voteCountType> *location;
 
-    searchDVDList(title, found, location);
+    searchVoteList(title, found, location);
 
     if (found)
         location->info.checkOut();
@@ -47,61 +47,61 @@ void dvdBinaryTree::dvdCheckOut(string title)
              << endl;
 }
 
-bool dvdBinaryTree::dvdCheckTitle(string title) const
+bool VoteBinaryTree::voteCheckTitle(string title) const
 {
     bool found = false;
-    nodeType<dvdType> *location;
+    nodeType<voteCountType> *location;
 
-    searchDVDList(title, found, location);
+    searchVoteList(title, found, location);
 
     return found;
 }
 
-void dvdBinaryTree::dvdUpdateInStock(string title, int num)
+void VoteBinaryTree::voteUpdateInStock(string title, int num)
 {
     bool found = false;
-    nodeType<dvdType> *location;
+    nodeType<voteCountType> *location;
 
-    searchDVDList(title, found, location);
+    searchVoteList(title, found, location);
 
     if (found)
-        location->info.updateInStock(num);
+        location->info.updateDemVoteCount(num);
     else
         cout << "The store does not carry " << title
              << endl;
 }
 
-void dvdBinaryTree::dvdSetCopiesInStock(string title,
+void VoteBinaryTree::voteSetCopiesInStock(string title,
                                         int num)
 {
     bool found = false;
-    nodeType<dvdType> *location;
+    nodeType<voteCountType> *location;
 
-    searchDVDList(title, found, location);
+    searchVoteList(title, found, location);
 
     if (found)
-        location->info.setCopiesInStock(num);
+        location->info.setElectoralVotesAvailable(num);
     else
         cout << "The store does not carry " << title
              << endl;
 }
 
-bool dvdBinaryTree::dvdSearch(string title) {
+bool VoteBinaryTree::voteSearch(string title) {
     bool found = false;
-    nodeType<dvdType> *location;
+    nodeType<voteCountType> *location;
 
-    searchDVDList(title, found, location);
+    searchVoteList(title, found, location);
 
     return found;
 }
 
-void dvdBinaryTree::searchDVDList(string title, bool &found, nodeType<dvdType> *&current) const
+void VoteBinaryTree::searchVoteList(string id, bool &found, nodeType<voteCountType> *&current) const
 {
     found = false;
 
-    dvdType temp;
+    voteCountType temp;
 
-    temp.setDVDInfo(title, "", "", "", "", "", 0);
+    temp.setVoterInfo(id, "", 0, 0, 0);
 
     if (root == nullptr) { //tree is empty 
         cout << "Cannot search an empty list. " << endl;
@@ -119,15 +119,15 @@ void dvdBinaryTree::searchDVDList(string title, bool &found, nodeType<dvdType> *
     }
 }
 
-void dvdBinaryTree::dvdPrintTitle() const {
+void VoteBinaryTree::votePrintTitle() const {
     inorderTitle(root);
 }
 
-void dvdBinaryTree::inorderTitle(nodeType<dvdType> *p) const {
+void VoteBinaryTree::inorderTitle(nodeType<voteCountType> *p) const {
     if (p != nullptr)
     {
         inorderTitle(p->lLink);
-        p->info.printTitle();
+        p->info.printID();
         inorderTitle(p->rLink);
     }
 }
