@@ -57,22 +57,28 @@ bool VoteBinaryTree::voteCheckTitle(string title) const
     return found;
 }
 
-void VoteBinaryTree::voteUpdateInStock(string title, int num)
+void VoteBinaryTree::voteUpdateInStock(string title, string party, int num)
 {
     bool found = false;
-    nodeType<voteCountType> *location;
+    nodeType<voteCountType> *count;
 
-    searchVoteList(title, found, location);
+    searchVoteList(title, found, count);
 
-    if (found)
-        location->info.updateDemVoteCount(num);
-    else
-        cout << "The store does not carry " << title
-             << endl;
+    if (found) {
+        if (party == "D") {
+            count->info.updateDemVoteCount(num);
+        } else if (party == "R") {
+            count->info.updateRepVoteCount(num);
+        } else {
+            cout << "This message doesnt correspond to either party." << endl;
+        }
+        
+    } else {
+        cout << "there was an error in the id." << endl;
+    }
 }
 
-void VoteBinaryTree::voteSetCopiesInStock(string title,
-                                        int num)
+void VoteBinaryTree::voteSetCopiesInStock(string title, int num)
 {
     bool found = false;
     nodeType<voteCountType> *location;
@@ -86,11 +92,11 @@ void VoteBinaryTree::voteSetCopiesInStock(string title,
              << endl;
 }
 
-bool VoteBinaryTree::voteSearch(string title) {
+bool VoteBinaryTree::voteSearch(string id) {
     bool found = false;
     nodeType<voteCountType> *location;
 
-    searchVoteList(title, found, location);
+    searchVoteList(id, found, location);
 
     return found;
 }
@@ -121,6 +127,56 @@ void VoteBinaryTree::searchVoteList(string id, bool &found, nodeType<voteCountTy
 
 void VoteBinaryTree::votePrintTitle() const {
     inorderTitle(root);
+}
+
+void VoteBinaryTree::getEVotes() const
+{
+    inorderEVotes(root);
+}
+
+void VoteBinaryTree::getRepVotes() const {
+    int count = 0;
+    countTotalRepVotes(root, count);
+    cout << "Popular Republican Votes nation wide at: " << count << endl;
+    cout << endl;
+}
+
+void VoteBinaryTree::getDemVotes() const {
+    int count = 0;
+    countTotalDemVotes(root, count);
+    cout << "Popular Democrat Votes nation wide at: " << count << endl;
+    cout << endl;
+}
+
+int VoteBinaryTree::countTotalRepVotes(nodeType<voteCountType> *p, int &count) const
+{
+    if (p != nullptr)
+    {
+        countTotalRepVotes(p->lLink, count);
+        count += p->info.getPopularVoteRepublican();
+        countTotalRepVotes(p->rLink, count);
+    }
+    return count;
+}
+
+int VoteBinaryTree::countTotalDemVotes(nodeType<voteCountType> *p, int &count) const
+{
+    if (p != nullptr)
+    {
+        countTotalDemVotes(p->lLink, count);
+        count += p->info.getPopularVoteDemocrat();
+        countTotalDemVotes(p->rLink, count);
+    }
+    return count;
+}
+
+void VoteBinaryTree::inorderEVotes(nodeType<voteCountType> *p) const {
+    if (p != nullptr)
+    {
+        inorderEVotes(p->lLink);
+        p->info.printEVotes();
+        inorderEVotes(p->rLink);
+    }
 }
 
 void VoteBinaryTree::inorderTitle(nodeType<voteCountType> *p) const {

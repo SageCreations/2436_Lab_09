@@ -39,6 +39,13 @@ void voteCountType::printID() const
     cout << "State ID: " << stateID << endl;
 }
 
+void voteCountType::printEVotes() const
+{
+    cout << "State Name: " << stateName << endl;
+    cout << "Electoral Votes Available: " << eVotes << endl;
+    cout << endl;
+}
+
 void voteCountType::printInfo() const
 {
     cout << "State ID: " << stateID << endl;
@@ -86,7 +93,12 @@ string voteCountType::getStateID() const
 
 voteCountType::voteCountType()
 {
-    setVoterInfo("", "", 0, 0, 0);
+    stateID = "";
+    stateName = "";
+    eVotes = 0;
+    popVR = 0;
+    popVD = 0;
+    setVoterInfo(stateID, stateName, eVotes, popVR, popVD);
 }
 
 voteCountType::voteCountType(string stateID, string stateName, int eVoteAvailable,

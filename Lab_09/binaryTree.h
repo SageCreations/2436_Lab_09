@@ -33,6 +33,8 @@ public:
       //Function to do an inorder traversal of the binary tree.
       //Postcondition: Nodes are printed in inorder sequence.
 
+    void inOrderPassTraversal() const;
+
     void preorderTraversal() const;
       //Function to do a preorder traversal of the binary tree.
       //Postcondition: Nodes are printed in preorder sequence.
@@ -119,6 +121,9 @@ private:
       //Postcondition: Nodes of the binary tree, to which p
       //               points, are printed in inorder sequence.
 
+    
+    void inOrderPass(nodeType<elemType> *p) const;
+
     void preorder(nodeType<elemType> *p) const;
       //Function to do a preorder traversal of the binary
       //tree to which p points.  
@@ -177,6 +182,12 @@ void binaryTreeType<elemType>::inorderTraversal() const
 }
 
 template <class elemType>
+void binaryTreeType<elemType>::inOrderPassTraversal() const
+{
+    inOrderPass(root);
+}
+
+template <class elemType>
 void binaryTreeType<elemType>::preorderTraversal() const
 {
     preorder(root);
@@ -230,6 +241,17 @@ void binaryTreeType<elemType>::inorder
     {
         inorder(p->lLink);
         cout << p->info << " ";
+        inorder(p->rLink);
+    }
+}
+
+template <class elemType>
+void binaryTreeType<elemType>::inOrderPass(nodeType<elemType> *p) const 
+{
+  if (p != nullptr)
+    {
+        inorder(p->lLink);
+        //cout << p->info << " ";
         inorder(p->rLink);
     }
 }

@@ -19,6 +19,7 @@ class voteCountType {
     void checkIn();
     int getNoOfCopiesInStock() const;
     void printID() const;
+    void printEVotes() const;
     void printInfo() const;
     bool checkID(string sID);
     void updateRepVoteCount(int num);

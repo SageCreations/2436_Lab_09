@@ -81,7 +81,7 @@ private:
   */
 
 
-  bool voteSearch(string title);
+  bool voteSearch(string id);
   //Function to search the list to see whether a
   //particular title, specified by the parameter title,
   //is in the store.
@@ -109,7 +109,7 @@ private:
   //Postcondition: Returns true if the DVD�s title is
   //               the same as title, and false otherwise.
 
-  void voteUpdateInStock(string title, int num);
+  void voteUpdateInStock(string title, string party, int num);
   //Function to update the number of copies of a DVD
   //by adding the value of the parameter num. The
   //parameter title specifies the name of the DVD for
@@ -127,6 +127,13 @@ private:
   //Function to print the titles of all the DVDs in
   //the store.
 
+  void getRepVotes() const;
+  void getDemVotes() const;
+
+  void getEVotes() const;
+
+  
+
 private:
   void searchVoteList(string id, bool &found,
                      nodeType<voteCountType> *&current) const;
@@ -139,6 +146,11 @@ private:
   void inorderTitle(nodeType<voteCountType> *p) const;
   //This function prints the titles of all the DVDs
   //in stock.
+  
+  int countTotalRepVotes(nodeType<voteCountType> *p, int &count) const;
+  int countTotalDemVotes(nodeType<voteCountType> *p, int &count) const;
+
+  void inorderEVotes(nodeType<voteCountType> *p) const;
 };
 
 #endif
